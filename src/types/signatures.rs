@@ -1,0 +1,35 @@
+//! Signature type definitions - preserving real ZHTP signature structures
+//! 
+//! Real implementations from crypto.rs, lines 162-192
+
+use serde::{Serialize, Deserialize};
+use crate::types::PublicKey;
+
+/// Digital signature with quantum-resistant security
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Signature {
+    /// The actual signature bytes
+    pub signature: Vec<u8>,
+    /// Public key used for verification
+    pub public_key: PublicKey,
+    /// Signature algorithm identifier
+    pub algorithm: SignatureAlgorithm,
+    /// Timestamp of signature creation
+    pub timestamp: u64,
+}
+
+/// Supported signature algorithms
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub enum SignatureAlgorithm {
+    /// CRYSTALS-Dilithium Level 2 (post-quantum)
+    Dilithium2,
+    /// CRYSTALS-Dilithium Level 5 (post-quantum, highest security)
+    Dilithium5,
+    /// Ed25519 (classical, for compatibility)
+    Ed25519,
+    /// Ring signature for anonymity
+    RingSignature,
+}
+
+/// Type alias for compatibility with other modules
+pub type PostQuantumSignature = Signature;
