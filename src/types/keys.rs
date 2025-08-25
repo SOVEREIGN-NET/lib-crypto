@@ -34,6 +34,11 @@ impl PublicKey {
         }
     }
 
+    /// Get the size of this public key in bytes
+    pub fn size(&self) -> usize {
+        self.dilithium_pk.len() + self.kyber_pk.len() + self.ed25519_pk.len() + 32 // key_id
+    }
+
     /// Convert public key to bytes for signature verification
     pub fn as_bytes(&self) -> Vec<u8> {
         // For Dilithium signatures, use Dilithium public key
@@ -86,4 +91,11 @@ pub struct PrivateKey {
     pub ed25519_sk: Vec<u8>,
     /// Master seed for key derivation
     pub master_seed: Vec<u8>,
+}
+
+impl PrivateKey {
+    /// Get the size of this private key in bytes
+    pub fn size(&self) -> usize {
+        self.dilithium_sk.len() + self.kyber_sk.len() + self.ed25519_sk.len() + self.master_seed.len()
+    }
 }

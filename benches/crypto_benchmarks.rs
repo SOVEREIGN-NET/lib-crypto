@@ -2,7 +2,7 @@
 //! Performance testing for post-quantum cryptographic primitives
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use zhtp_crypto::{KeyPair, hash_blake3, generate_nonce};
+use lib_crypto::{KeyPair, hash_blake3, generate_nonce};
 use anyhow::Result;
 
 fn benchmark_keypair_generation(c: &mut Criterion) {

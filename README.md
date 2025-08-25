@@ -43,7 +43,7 @@ Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-zhtp-crypto = { path = "../zhtp-crypto" }
+lib-crypto = { path = "../lib-crypto" }
 
 # For zero-knowledge functionality:
 zhtp-zk = { path = "../zhtp-zk" }
@@ -54,7 +54,7 @@ zhtp-zk = { path = "../zhtp-zk" }
 ### Basic Cryptographic Operations
 
 ```rust
-use zhtp_crypto::{KeyPair, hash_blake3};
+use lib_crypto::{KeyPair, hash_blake3};
 
 // Generate post-quantum keypair
 let keypair = KeyPair::generate()?;
@@ -77,7 +77,7 @@ let hash = hash_blake3(b"data to hash");
 ### Zero-Knowledge Proofs
 
 ```rust
-use zhtp_crypto::KeyPair;
+use lib_crypto::KeyPair;
 // For actual ZK functionality, use zhtp-zk:
 // use zhtp_zk::plonky2::ZkProofSystem;
 
@@ -91,7 +91,7 @@ let zk_result = keypair.prove_identity(25, 840, 9999, 18, 840);
 ## 🏗️ Architecture
 
 ```
-zhtp-crypto/
+lib-crypto/
 ├── src/
 │   ├── types/           # Core type definitions
 │   ├── keypair/         # KeyPair generation and operations
@@ -111,7 +111,7 @@ zhtp-crypto/
 
 ## 🔗 Integration with ZK
 
-The `zhtp-crypto` package provides trait interfaces for zero-knowledge functionality:
+The `lib-crypto` package provides trait interfaces for zero-knowledge functionality:
 
 - **Trait-based design** avoids circular dependencies
 - **Clear error messages** guide users to `zhtp-zk` package

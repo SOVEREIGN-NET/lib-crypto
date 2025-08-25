@@ -1,5 +1,5 @@
 [package]
-name = "zhtp-crypto"
+name = "lib-crypto"
 version = "0.1.0"
 edition = "2021"
 description = "ZHTP Post-Quantum Cryptography Foundation Module - Real CRYSTALS implementations"
@@ -37,6 +37,10 @@ zeroize = { version = "1.6", features = ["derive"] }
 # For development/testing
 [dev-dependencies]
 criterion = "0.5"
+
+[lib]
+name = "lib_crypto"
+path = "src/lib.rs"
 
 [features]
 default = ["std"]
