@@ -1,7 +1,7 @@
 //! Plonky2 zero-knowledge proof integration for ZHTP
 //! 
 //! Trait-based interface for ZK functionality to avoid circular dependencies.
-//! Actual implementation is provided by the zhtp-zk package.
+//! Actual implementation is provided by the lib-proofs package.
 
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
@@ -79,9 +79,9 @@ impl ZkProofSystem for DefaultZkProofSystem {
         _required_jurisdiction: u64,
     ) -> Result<Plonky2Proof> {
         Err(anyhow::anyhow!(
-            "ZK proof functionality requires the zhtp-zk package. \
-            Add zhtp-zk = {{ path = \"../zhtp-zk\" }} to your Cargo.toml \
-            and use zhtp_zk::plonky2::ZkProofSystem instead."
+            "ZK proof functionality requires the lib-proofs package. \
+            Add lib-proofs = {{ path = \"../lib-proofs\" }} to your Cargo.toml \
+            and use lib_proofs::plonky2::ZkProofSystem instead."
         ))
     }
 
@@ -93,9 +93,9 @@ impl ZkProofSystem for DefaultZkProofSystem {
         _max_value: u64,
     ) -> Result<Plonky2Proof> {
         Err(anyhow::anyhow!(
-            "ZK proof functionality requires the zhtp-zk package. \
-            Add zhtp-zk = {{ path = \"../zhtp-zk\" }} to your Cargo.toml \
-            and use zhtp_zk::range::BulletproofRangeProof instead."
+            "ZK proof functionality requires the lib-proofs package. \
+            Add lib-proofs = {{ path = \"../lib-proofs\" }} to your Cargo.toml \
+            and use lib_proofs::range::BulletproofRangeProof instead."
         ))
     }
 
@@ -108,30 +108,30 @@ impl ZkProofSystem for DefaultZkProofSystem {
         _required_permission: u64,
     ) -> Result<Plonky2Proof> {
         Err(anyhow::anyhow!(
-            "ZK proof functionality requires the zhtp-zk package. \
-            Add zhtp-zk = {{ path = \"../zhtp-zk\" }} to your Cargo.toml \
-            and use zhtp_zk::plonky2::ZkProofSystem instead."
+            "ZK proof functionality requires the lib-proofs package. \
+            Add lib-proofs = {{ path = \"../lib-proofs\" }} to your Cargo.toml \
+            and use lib_proofs::plonky2::ZkProofSystem instead."
         ))
     }
 
     fn verify_identity(&self, _proof: &Plonky2Proof) -> Result<bool> {
         Err(anyhow::anyhow!(
-            "ZK verification requires the zhtp-zk package. \
-            Use zhtp_zk::verifiers::identity_verifier instead."
+            "ZK verification requires the lib-proofs package. \
+            Use lib_proofs::verifiers::identity_verifier instead."
         ))
     }
 
     fn verify_range(&self, _proof: &Plonky2Proof) -> Result<bool> {
         Err(anyhow::anyhow!(
-            "ZK verification requires the zhtp-zk package. \
-            Use zhtp_zk::verifiers::range_verifier instead."
+            "ZK verification requires the lib-proofs package. \
+            Use lib_proofs::verifiers::range_verifier instead."
         ))
     }
 
     fn verify_storage_access(&self, _proof: &Plonky2Proof) -> Result<bool> {
         Err(anyhow::anyhow!(
-            "ZK verification requires the zhtp-zk package. \
-            Use zhtp_zk::verifiers instead."
+            "ZK verification requires the lib-proofs package. \
+            Use lib_proofs::verifiers instead."
         ))
     }
 }
@@ -194,15 +194,15 @@ mod tests {
         
         let identity_result = zk_system.prove_identity(12345, 25, 840, 9999, 18, 840);
         assert!(identity_result.is_err());
-        assert!(identity_result.unwrap_err().to_string().contains("zhtp-zk"));
+        assert!(identity_result.unwrap_err().to_string().contains("lib-proofs"));
         
         let range_result = zk_system.prove_range(500, 123456, 0, 1000);
         assert!(range_result.is_err());
-        assert!(range_result.unwrap_err().to_string().contains("zhtp-zk"));
+        assert!(range_result.unwrap_err().to_string().contains("lib-proofs"));
         
         let storage_result = zk_system.prove_storage_access(11111, 22222, 33333, 5, 3);
         assert!(storage_result.is_err());
-        assert!(storage_result.unwrap_err().to_string().contains("zhtp-zk"));
+        assert!(storage_result.unwrap_err().to_string().contains("lib-proofs"));
     }
 
     #[test]
@@ -216,15 +216,15 @@ mod tests {
         
         let identity_result = prove_identity(&private_key, 25, 840, 9999, 18, 840);
         assert!(identity_result.is_err());
-        assert!(identity_result.unwrap_err().to_string().contains("zhtp-zk"));
+        assert!(identity_result.unwrap_err().to_string().contains("lib-proofs"));
         
         let range_result = prove_range(500, 123456, 0, 1000);
         assert!(range_result.is_err());
-        assert!(range_result.unwrap_err().to_string().contains("zhtp-zk"));
+        assert!(range_result.unwrap_err().to_string().contains("lib-proofs"));
         
         let storage_result = prove_storage_access(11111, 22222, 33333, 5, 3);
         assert!(storage_result.is_err());
-        assert!(storage_result.unwrap_err().to_string().contains("zhtp-zk"));
+        assert!(storage_result.unwrap_err().to_string().contains("lib-proofs"));
     }
 
     #[test]

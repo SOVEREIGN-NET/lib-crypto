@@ -32,7 +32,7 @@ hex = "0.4"
 zeroize = { version = "1.6", features = ["derive"] }
 
 # NOTE: ZK proof functionality is provided via trait interface
-# Implementation is available in zhtp-zk package to avoid circular dependencies
+# Implementation is available in lib-proofs package to avoid circular dependencies
 
 # For development/testing
 [dev-dependencies]

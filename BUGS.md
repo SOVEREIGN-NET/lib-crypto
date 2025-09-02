@@ -30,7 +30,7 @@ proposed fix
 [
     ## **What Needs to be Added and Why**
 
-1. Integrate PQC from lib-crypto into zhtp-zk for quantum-safe ZK proofs**
+1. Integrate PQC from lib-crypto into lib-proofs for quantum-safe ZK proofs**
 
 **WHY:** Currently ZK proofs use classical cryptography that quantum computers can break. Need to make them quantum-resistant.
 
@@ -49,7 +49,7 @@ proposed fix
 
 ---
 
-3. Create hybrid proof system in zhtp-zk**
+3. Create hybrid proof system in lib-proofs**
 
 **WHY:** Bridge classical ZK (for privacy) with PQC (for quantum resistance).
 

@@ -19,7 +19,7 @@ This package implements **production-ready** post-quantum cryptography:
 
 ## 🔐 Zero-Knowledge Integration
 
-Provides trait interfaces for zero-knowledge proofs implemented by the `zhtp-zk` package:
+Provides trait interfaces for zero-knowledge proofs implemented by the `lib-proofs` package:
 
 - Identity proofs without revealing personal information
 - Range proofs without revealing values
@@ -46,7 +46,7 @@ Add to your `Cargo.toml`:
 lib-crypto = { path = "../lib-crypto" }
 
 # For zero-knowledge functionality:
-zhtp-zk = { path = "../zhtp-zk" }
+lib-proofs = { path = "../lib-proofs" }
 ```
 
 ## 🔧 Usage
@@ -78,14 +78,14 @@ let hash = hash_blake3(b"data to hash");
 
 ```rust
 use lib_crypto::KeyPair;
-// For actual ZK functionality, use zhtp-zk:
-// use zhtp_zk::plonky2::ZkProofSystem;
+// For actual ZK functionality, use lib-proofs:
+// use lib_proofs::plonky2::ZkProofSystem;
 
 let keypair = KeyPair::generate()?;
 
-// ZK trait interface (requires zhtp-zk for implementation)
+// ZK trait interface (requires lib-proofs for implementation)
 let zk_result = keypair.prove_identity(25, 840, 9999, 18, 840);
-// Returns helpful error message pointing to zhtp-zk package
+// Returns helpful error message pointing to lib-proofs package
 ```
 
 ## 🏗️ Architecture
@@ -114,7 +114,7 @@ lib-crypto/
 The `lib-crypto` package provides trait interfaces for zero-knowledge functionality:
 
 - **Trait-based design** avoids circular dependencies
-- **Clear error messages** guide users to `zhtp-zk` package
+- **Clear error messages** guide users to `lib-proofs` package
 - **Seamless integration** when both packages are used together
 - **Production flexibility** for different ZK implementations
 
