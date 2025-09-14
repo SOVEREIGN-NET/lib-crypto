@@ -33,6 +33,7 @@ impl PublicKey {
             key_id,
         }
     }
+}
 
     /// Get the size of this public key in bytes
     pub fn size(&self) -> usize {
@@ -76,6 +77,17 @@ impl PublicKey {
                 // For any other algorithm, use generic verification
                 verify_signature(message, &signature.signature, &self.dilithium_pk)
             }
+        }
+    }
+}
+
+impl Default for PublicKey {
+    fn default() -> Self {
+        PublicKey {
+            dilithium_pk: Vec::new(),
+            kyber_pk: Vec::new(),
+            ed25519_pk: Vec::new(),
+            key_id: [0u8; 32],
         }
     }
 }
