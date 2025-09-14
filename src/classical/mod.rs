@@ -8,4 +8,3 @@ pub mod curve25519;
 // Re-export main functions
 pub use ed25519::*;
 pub use curve25519::*;
-pub use curve25519::*;

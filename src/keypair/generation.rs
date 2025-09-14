@@ -4,8 +4,6 @@
 
 use anyhow::Result;
 use blake3::Hasher as Blake3Hasher;
-use sha3::Sha3_512;
-use hkdf::Hkdf;
 use rand::{RngCore};
 use rand::rngs::OsRng;
 use pqcrypto_dilithium::dilithium2;
@@ -15,7 +13,7 @@ use pqcrypto_traits::{
     kem::{PublicKey as KemPublicKey, SecretKey as KemSecretKey},
 };
 use ed25519_dalek::{SigningKey};
-use crate::types::{PublicKey, PrivateKey, Signature, SignatureAlgorithm};
+use crate::types::{PublicKey, PrivateKey};
 
 /// Real quantum-resistant key pair with secure memory management
 #[derive(Debug, Clone)]

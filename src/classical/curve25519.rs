@@ -62,7 +62,7 @@ pub fn bytes_to_point(bytes: &[u8; 32]) -> Option<RistrettoPoint> {
 
 /// Scalar multiplication on Curve25519 for ring signatures
 /// Real implementation from crypto.rs, lines 720-735
-pub fn curve25519_scalar_mult(scalar: &[u8], point: &[u8; 32]) -> Result<[u8; 32]> {
+pub fn curve25519_scalar_mult(scalar: &[u8], _point: &[u8; 32]) -> Result<[u8; 32]> {
     // Convert scalar bytes to Scalar (handle different input lengths)
     let scalar_bytes = if scalar.len() >= 32 {
         let mut bytes = [0u8; 32];
