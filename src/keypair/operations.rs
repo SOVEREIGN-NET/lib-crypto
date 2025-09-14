@@ -241,71 +241,9 @@ impl KeyPair {
         Ok(plaintext.to_vec())
     }
 
-    /// Generate zero-knowledge identity proof using ZK trait interface
-    pub fn prove_identity(
-        &self,
-        age: u64,
-        jurisdiction_hash: u64,
-        credential_hash: u64,
-        min_age: u64,
-        required_jurisdiction: u64,
-    ) -> Result<crate::zk_integration::Plonky2Proof> {
-        crate::zk_integration::prove_identity(
-            &self.private_key,
-            age,
-            jurisdiction_hash,
-            credential_hash,
-            min_age,
-            required_jurisdiction,
-        )
-    }
-
-    /// Generate zero-knowledge range proof using ZK trait interface
-    pub fn prove_range(
-        &self,
-        value: u64,
-        min_value: u64,
-        max_value: u64,
-    ) -> Result<crate::zk_integration::Plonky2Proof> {
-        // Use part of key_id as blinding factor
-        let blinding_factor = u64::from_le_bytes([
-            self.public_key.key_id[8], self.public_key.key_id[9], 
-            self.public_key.key_id[10], self.public_key.key_id[11],
-            self.public_key.key_id[12], self.public_key.key_id[13], 
-            self.public_key.key_id[14], self.public_key.key_id[15],
-        ]);
-        
-        crate::zk_integration::prove_range(value, blinding_factor, min_value, max_value)
-    }
-
-    /// Generate zero-knowledge storage access proof using ZK trait interface
-    pub fn prove_storage_access(
-        &self,
-        data_hash: u64,
-        permission_level: u64,
-        required_permission: u64,
-    ) -> Result<crate::zk_integration::Plonky2Proof> {
-        // Use parts of key_id for access parameters
-        let access_key = u64::from_le_bytes([
-            self.public_key.key_id[16], self.public_key.key_id[17], 
-            self.public_key.key_id[18], self.public_key.key_id[19],
-            self.public_key.key_id[20], self.public_key.key_id[21], 
-            self.public_key.key_id[22], self.public_key.key_id[23],
-        ]);
-        
-        let requester_secret = u64::from_le_bytes([
-            self.public_key.key_id[24], self.public_key.key_id[25], 
-            self.public_key.key_id[26], self.public_key.key_id[27],
-            self.public_key.key_id[28], self.public_key.key_id[29], 
-            self.public_key.key_id[30], self.public_key.key_id[31],
-        ]);
-        
-        crate::zk_integration::prove_storage_access(
-            access_key,
-            requester_secret,
-            data_hash,
-            permission_level,
-            required_permission,
-        )
-    }
+    // NOTE: ZK proof methods moved to lib-proofs for proper architectural separation.
+    // Use lib-proofs crate for zero-knowledge proof functionality:
+    // 
+    // use lib_proofs::zk_integration;
+    // let proof = zk_integration::prove_identity(&keypair.private_key, age, ...)?;
 }

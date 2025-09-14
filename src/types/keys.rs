@@ -33,7 +33,6 @@ impl PublicKey {
             key_id,
         }
     }
-}
 
     /// Get the size of this public key in bytes
     pub fn size(&self) -> usize {

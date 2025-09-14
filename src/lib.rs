@@ -12,7 +12,6 @@ pub mod symmetric;
 pub mod types;
 pub mod utils;
 pub mod verification;
-pub mod zk_integration;
 
 // New modules for missing functionality
 pub mod hashing;
@@ -44,8 +43,7 @@ pub use symmetric::{
 // Re-export key derivation
 pub use kdf::hkdf::derive_keys;
 
-// Re-export ZK integration
-pub use zk_integration::*;
+// Note: ZK integration moved to lib-proofs for proper architectural separation
 
 // Re-export utility functions
 pub use utils::compatibility::{generate_keypair, sign_message};
