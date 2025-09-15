@@ -49,6 +49,9 @@ proposed fix
 
 ---
 
+2. ring signiture needs proper pqc and zkps. zk framework needs pqc. key exchange needs zkps and integration.
+
+
 3. Create hybrid proof system in lib-proofs**
 
 **WHY:** Bridge classical ZK (for privacy) with PQC (for quantum resistance).

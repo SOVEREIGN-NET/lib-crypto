@@ -80,17 +80,6 @@ impl PublicKey {
     }
 }
 
-impl Default for PublicKey {
-    fn default() -> Self {
-        PublicKey {
-            dilithium_pk: Vec::new(),
-            kyber_pk: Vec::new(),
-            ed25519_pk: Vec::new(),
-            key_id: [0u8; 32],
-        }
-    }
-}
-
 /// Real quantum-resistant private key (zeroized on drop for security)
 #[derive(Debug, Clone, Zeroize, ZeroizeOnDrop)]
 pub struct PrivateKey {
