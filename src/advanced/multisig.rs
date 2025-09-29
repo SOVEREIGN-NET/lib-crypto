@@ -74,7 +74,7 @@ impl MultiSig {
                 private_key: PrivateKey {
                     dilithium_sk: vec![],
                     kyber_sk: vec![],
-                    ed25519_sk: vec![],
+                    // ed25519_sk removed - pure PQC only
                     master_seed: vec![0u8; 64],
                 },
             };

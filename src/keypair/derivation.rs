@@ -14,7 +14,7 @@ use pqcrypto_traits::{
     sign::{PublicKey as SignPublicKey, SecretKey as SignSecretKey},
     kem::{PublicKey as KemPublicKey, SecretKey as KemSecretKey},
 };
-use ed25519_dalek::{SigningKey};
+// Ed25519 imports removed - pure post-quantum only
 use crate::types::{PublicKey, PrivateKey};
 use super::KeyPair;
 
@@ -40,20 +40,19 @@ impl KeyPair {
         let (kyber_pk, kyber_sk) = kyber512::keypair();
         let mut sk_bytes = [0u8; 32];
         OsRng.fill_bytes(&mut sk_bytes);
-        let signing_key = SigningKey::from_bytes(&sk_bytes);
-        let verifying_key = signing_key.verifying_key();
+        // Ed25519 key generation removed - pure post-quantum only
 
         Ok(KeyPair {
             public_key: PublicKey {
                 dilithium_pk: dilithium_pk.as_bytes().to_vec(),
                 kyber_pk: kyber_pk.as_bytes().to_vec(),
-                ed25519_pk: verifying_key.as_bytes().to_vec(),
+                // ed25519_pk removed - pure PQC only
                 key_id, // This is deterministic based on seed
             },
             private_key: PrivateKey {
                 dilithium_sk: dilithium_sk.as_bytes().to_vec(),
                 kyber_sk: kyber_sk.as_bytes().to_vec(),
-                ed25519_sk: signing_key.as_bytes().to_vec(),
+                // ed25519_sk removed - pure PQC only
                 master_seed: expanded_seed,
             },
         })

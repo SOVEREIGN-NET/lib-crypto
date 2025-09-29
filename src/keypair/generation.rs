@@ -12,7 +12,6 @@ use pqcrypto_traits::{
     sign::{PublicKey as SignPublicKey, SecretKey as SignSecretKey},
     kem::{PublicKey as KemPublicKey, SecretKey as KemSecretKey},
 };
-use ed25519_dalek::{SigningKey};
 use crate::types::{PublicKey, PrivateKey};
 
 /// Real quantum-resistant key pair with secure memory management
@@ -37,33 +36,22 @@ impl KeyPair {
         
         // Generate real CRYSTALS-Kyber key pair (NIST post-quantum standard)
         let (kyber_pk, kyber_sk) = kyber512::keypair();
-
-        // Generate Ed25519 key pair for legacy compatibility
-        let signing_key = SigningKey::from_bytes(&{
-            let mut sk_bytes = [0u8; 32];
-            rng.fill_bytes(&mut sk_bytes);
-            sk_bytes
-        });
-        let verifying_key = signing_key.verifying_key();
         
-        // Calculate unique key ID from all public keys
+        // Calculate unique key ID from post-quantum public keys only
         let mut hasher = Blake3Hasher::new();
         hasher.update(dilithium_pk.as_bytes());
         hasher.update(kyber_pk.as_bytes());
-        hasher.update(verifying_key.as_bytes());
         let key_id: [u8; 32] = hasher.finalize().into();
 
         let keypair = KeyPair {
             public_key: PublicKey {
                 dilithium_pk: dilithium_pk.as_bytes().to_vec(),
                 kyber_pk: kyber_pk.as_bytes().to_vec(),
-                ed25519_pk: verifying_key.as_bytes().to_vec(),
                 key_id,
             },
             private_key: PrivateKey {
                 dilithium_sk: dilithium_sk.as_bytes().to_vec(),
                 kyber_sk: kyber_sk.as_bytes().to_vec(),
-                ed25519_sk: signing_key.as_bytes().to_vec(),
                 master_seed,
             },
         };
@@ -85,9 +73,7 @@ impl KeyPair {
             return Err(anyhow::anyhow!("Weak Kyber private key detected"));
         }
         
-        if self.private_key.ed25519_sk.iter().all(|&x| x == 0) {
-            return Err(anyhow::anyhow!("Weak Ed25519 private key detected"));
-        }
+        // Ed25519 validation removed - pure post-quantum only
         
         // Verify that public key matches private key by doing a test signature
         let test_message = b"ZHTP-KeyPair-Validation-Test";

@@ -3,7 +3,6 @@
 //! Real implementation from crypto.rs, lines 960-1087 including browser compatibility
 
 use anyhow::Result;
-use ed25519_dalek::{Verifier, VerifyingKey, Signature as Ed25519Signature};
 use pqcrypto_dilithium::dilithium2;
 use pqcrypto_traits::sign::{PublicKey as SignPublicKey, SignedMessage};
 use crate::hashing::hash_blake3;
@@ -60,20 +59,8 @@ pub fn verify_signature(message: &[u8], signature: &[u8], public_key: &[u8]) -> 
         return Ok(true);
     }
     
-    // For Ed25519 signatures (legacy compatibility)
-    if signature.len() == 64 && public_key.len() == 32 {
-        let verifying_key = VerifyingKey::from_bytes(
-            public_key.try_into().map_err(|_| anyhow::anyhow!("Invalid public key"))?
-        ).map_err(|e| anyhow::anyhow!("Invalid verifying key: {}", e))?;
-        
-        let signature = Ed25519Signature::from_bytes(
-            signature.try_into().map_err(|_| anyhow::anyhow!("Invalid signature"))?
-        );
-        
-        Ok(verifying_key.verify(message, &signature).is_ok())
-    }
-    // For Dilithium signatures (post-quantum)
-    else {
+    // Pure post-quantum verification - CRYSTALS-Dilithium only (no Ed25519 fallback)
+    {
         let message_str = String::from_utf8_lossy(message);
         if !message_str.contains("ZHTP-KeyPair-Validation-Test") {
             // Only log for debugging non-test messages

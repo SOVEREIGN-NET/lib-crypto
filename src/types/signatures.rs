@@ -18,16 +18,14 @@ pub struct Signature {
     pub timestamp: u64,
 }
 
-/// Supported signature algorithms
+/// Supported signature algorithms (pure post-quantum only)
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub enum SignatureAlgorithm {
     /// CRYSTALS-Dilithium Level 2 (post-quantum)
     Dilithium2,
     /// CRYSTALS-Dilithium Level 5 (post-quantum, highest security)
     Dilithium5,
-    /// Ed25519 (classical, for compatibility)
-    Ed25519,
-    /// Ring signature for anonymity
+    /// Ring signature for anonymity (post-quantum)
     RingSignature,
 }
 

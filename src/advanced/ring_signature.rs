@@ -83,7 +83,7 @@ impl RingContext {
                 responses[i] = random_nonces[i];
                 
                 // Simulate commitment for non-signer
-                let commitment = self.simulate_commitment(&self.ring[i].ed25519_pk, &responses[i])?;
+                let commitment = self.simulate_commitment(&self.ring[i].dilithium_pk, &responses[i])?;
                 commitments.push(commitment);
             } else {
                 // Placeholder for signer's commitment (will be calculated later)
@@ -98,7 +98,7 @@ impl RingContext {
         
         // Add all ring member public keys and their commitments
         for (i, pubkey) in self.ring.iter().enumerate() {
-            challenge_data.extend_from_slice(&pubkey.ed25519_pk);
+            challenge_data.extend_from_slice(&pubkey.dilithium_pk);
             challenge_data.extend_from_slice(&commitments[i]);
         }
 
@@ -108,7 +108,7 @@ impl RingContext {
         responses[signer_index] = self.generate_signer_response(&challenge, private_key)?;
 
         // Step 4: Update signer's commitment with the real response
-        commitments[signer_index] = self.simulate_commitment(&self.ring[signer_index].ed25519_pk, &responses[signer_index])?;
+        commitments[signer_index] = self.simulate_commitment(&self.ring[signer_index].dilithium_pk, &responses[signer_index])?;
 
         // Step 5: Recompute final challenge with correct signer commitment
         let mut final_challenge_data = Vec::new();
@@ -116,7 +116,7 @@ impl RingContext {
         final_challenge_data.extend_from_slice(&key_image);
         
         for (i, pubkey) in self.ring.iter().enumerate() {
-            final_challenge_data.extend_from_slice(&pubkey.ed25519_pk);
+            final_challenge_data.extend_from_slice(&pubkey.dilithium_pk);
             final_challenge_data.extend_from_slice(&commitments[i]);
         }
 
@@ -134,7 +134,7 @@ impl RingContext {
     fn generate_key_image(&self, private_key: &PrivateKey) -> Result<[u8; 32]> {
         // Simplified key image generation using curve operations
         let base_point = [9u8; 32]; // Curve25519 base point
-        let key_image = curve25519_scalar_mult(&private_key.ed25519_sk, &base_point)?;
+        let key_image = curve25519_scalar_mult(&private_key.dilithium_sk, &base_point)?;
         Ok(key_image)
     }
 
@@ -154,7 +154,7 @@ impl RingContext {
         // Real response generation using the challenge and private key
         let mut response_data = Vec::new();
         response_data.extend_from_slice(challenge);
-        response_data.extend_from_slice(&private_key.ed25519_sk);
+        response_data.extend_from_slice(&private_key.dilithium_sk);
         response_data.extend_from_slice(b"ZHTP-RING-RESPONSE");
         Ok(hash_blake3(&response_data))
     }
@@ -174,7 +174,7 @@ pub fn verify_ring_signature(
     // Step 1: Recompute all commitments from the responses
     let mut commitments = Vec::new();
     for (i, response) in signature.responses.iter().enumerate() {
-        let commitment = simulate_commitment_verify(&ring[i].ed25519_pk, response)?;
+        let commitment = simulate_commitment_verify(&ring[i].dilithium_pk, response)?;
         commitments.push(commitment);
     }
 
@@ -185,7 +185,7 @@ pub fn verify_ring_signature(
     
     // Add all ring member public keys and their recomputed commitments
     for (i, pubkey) in ring.iter().enumerate() {
-        challenge_data.extend_from_slice(&pubkey.ed25519_pk);
+        challenge_data.extend_from_slice(&pubkey.dilithium_pk);
         challenge_data.extend_from_slice(&commitments[i]);
     }
 
