@@ -155,7 +155,7 @@ impl MessagingSystem {
         let public_key_hex = hex::encode(keypair.public_key().as_bytes());
         
         self.users.insert(username.to_string(), keypair);
-        println!("👤 User '{}' registered with public key: {}", username, &public_key_hex[..16]);
+        println!("User '{}' registered with public key: {}", username, &public_key_hex[..16]);
         
         Ok(public_key_hex)
     }
@@ -193,7 +193,7 @@ impl MessagingSystem {
         };
         
         self.message_history.push(secure_message);
-        println!("📨 Message sent from {} to {}", from, to);
+        println!("Message sent from {} to {}", from, to);
         
         Ok(())
     }
@@ -226,7 +226,7 @@ impl MessagingSystem {
                     decrypted_messages.push(format!("[{}] {}: {}", 
                         message.timestamp, message.from, content));
                 } else {
-                    println!("⚠️ Invalid signature on message from {}", message.from);
+                    println!("Invalid signature on message from {}", message.from);
                 }
             }
         }
@@ -381,7 +381,7 @@ impl DocumentSigningSystem {
             self.documents.push(signed_document);
         }
         
-        println!("✅ Document signed by {}", signer_name);
+        println!("Document signed by {}", signer_name);
         Ok(())
     }
     
@@ -420,7 +420,7 @@ impl DocumentSigningSystem {
             
             let signature = Signature::from_bytes(&sig.signature)?;
             if !signer_keypair.verify(&signature, &document_bytes)? {
-                println!("❌ Invalid signature from {}", sig.signer);
+                println!("Invalid signature from {}", sig.signer);
                 return Ok(false);
             }
         }
@@ -431,7 +431,7 @@ impl DocumentSigningSystem {
             return Ok(false);
         }
         
-        println!("✅ Document verification successful");
+        println!("Document verification successful");
         Ok(true)
     }
     
@@ -440,7 +440,7 @@ impl DocumentSigningSystem {
             .find(|d| &d.document.document_hash == document_hash)
             .ok_or_else(|| anyhow::anyhow!("Document not found"))?;
         
-        println!("\n📋 Document Information:");
+        println!("\nDocument Information:");
         println!("  Title: {}", signed_doc.document.title);
         println!("  Author: {}", signed_doc.document.author);
         println!("  Created: {}", signed_doc.document.created_at);
@@ -748,7 +748,7 @@ impl MultiPartyKeyExchange {
         let public_key_hex = hex::encode(keypair.public_key().as_bytes());
         
         self.participants.insert(name.to_string(), keypair);
-        println!("👥 Participant '{}' joined: {}", name, &public_key_hex[..16]);
+        println!("Participant '{}' joined: {}", name, &public_key_hex[..16]);
         
         Ok(public_key_hex)
     }
@@ -980,7 +980,7 @@ impl ZeroKnowledgeProofSystem {
         // Store verified claim
         self.verified_claims.push(claim.clone());
         
-        println!("✅ Zero-knowledge age proof verified (age >= {})", required_age);
+        println!("Zero-knowledge age proof verified (age >= {})", required_age);
         Ok(true)
     }
     
@@ -1066,7 +1066,7 @@ fn zero_knowledge_proof_example() -> Result<()> {
 use lib_crypto::*;
 
 fn main() -> Result<()> {
-    println!("🚀 SOVEREIGN_NET Crypto Examples\n");
+    println!(" SOVEREIGN_NET Crypto Examples\n");
     
     // Basic examples
     println!("=== Basic Examples ===");
@@ -1095,7 +1095,7 @@ fn main() -> Result<()> {
     zero_knowledge_proof_example()?;
     println!();
     
-    println!("🎉 All examples completed successfully!");
+    println!(" All examples completed successfully!");
     
     Ok(())
 }

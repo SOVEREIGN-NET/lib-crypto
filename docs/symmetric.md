@@ -251,19 +251,19 @@ use lib_crypto::symmetric::*;
 fn nonce_management() -> Result<()> {
     let key = generate_chacha20_key();
     
-    // ❌ Never reuse nonces with same key
+    // Never reuse nonces with same key
     let nonce = generate_nonce();
     let msg1 = b"First message";
     let msg2 = b"Second message";
     
     let _ct1 = encrypt_chacha20poly1305(msg1, b"", &key, &nonce)?;
-    // ❌ let _ct2 = encrypt_chacha20poly1305(msg2, b"", &key, &nonce)?; // INSECURE!
+    // let _ct2 = encrypt_chacha20poly1305(msg2, b"", &key, &nonce)?; // INSECURE!
     
-    // ✅ Use different nonce for each encryption
+    // Use different nonce for each encryption
     let nonce2 = generate_nonce();
     let _ct2 = encrypt_chacha20poly1305(msg2, b"", &key, &nonce2)?;
     
-    // ✅ Or use counter-based nonces (be careful with concurrency)
+    // Or use counter-based nonces (be careful with concurrency)
     for i in 0..10 {
         let mut counter_nonce = [0u8; 12];
         counter_nonce[8..].copy_from_slice(&(i as u32).to_le_bytes());
@@ -433,21 +433,21 @@ fn robust_symmetric_operations() -> Result<()> {
 use lib_crypto::symmetric::*;
 
 fn key_management_practices() -> Result<()> {
-    // ✅ Generate random keys
+    // Generate random keys
     let key = generate_chacha20_key();
     
-    // ❌ Don't use predictable keys
+    // Don't use predictable keys
     // let weak_key = [0u8; 32]; // All zeros
     // let weak_key = b"password".as_slice(); // Too short, predictable
     
-    // ✅ Derive keys properly if needed
+    // Derive keys properly if needed
     use lib_crypto::hashing::blake3_derive_key;
     let master_key = b"high-entropy-master-key-32-bytes";
     let derived_key = blake3_derive_key(master_key, b"SYMMETRIC_KEY_V1");
     
-    // ✅ Rotate keys periodically
-    // ✅ Use separate keys for different purposes
-    // ✅ Store keys securely (HSM, key management service)
+    // Rotate keys periodically
+    // Use separate keys for different purposes
+    // Store keys securely (HSM, key management service)
     
     Ok(())
 }
@@ -461,16 +461,16 @@ use lib_crypto::symmetric::*;
 fn nonce_best_practices() -> Result<()> {
     let key = generate_chacha20_key();
     
-    // ✅ Random nonces (if you can store them)
+    // Random nonces (if you can store them)
     let random_nonce = generate_nonce();
     
-    // ✅ Counter nonces (if sequential and no concurrency)
+    // Counter nonces (if sequential and no concurrency)
     let mut counter = 0u64;
     let mut counter_nonce = [0u8; 12];
     counter_nonce[4..].copy_from_slice(&counter.to_le_bytes());
     counter += 1;
     
-    // ✅ Timestamp + random (for distributed systems)
+    // Timestamp + random (for distributed systems)
     let timestamp = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)?
         .as_secs() as u32;

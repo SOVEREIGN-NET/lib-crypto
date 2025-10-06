@@ -24,7 +24,7 @@ Complete documentation for lib-crypto v0.1.0 - Comprehensive cryptographic libra
 - **[Integration Guide](integration.md)** - Application integration patterns
 - **[Examples](examples.md)** - Comprehensive usage examples
 
-## 🔍 Quick Reference
+## Quick Reference
 
 ### Basic Operations
 
@@ -109,7 +109,7 @@ let sha3_hash = sha3_256_hash(b"data to hash")?;
 let sha3_derived = sha3_kdf(b"master key", b"salt", b"info", 32)?;
 ```
 
-## 🎯 Use Case Navigation
+## Use Case Navigation
 
 ### By Application Type
 
@@ -160,7 +160,7 @@ let sha3_derived = sha3_kdf(b"master key", b"salt", b"info", 32)?;
 4. **[Classical](classical.md)** - Low-level primitives
 5. **[Security Guide](security.md)** - Advanced threat mitigation
 
-## 🔧 Development Resources
+## Development Resources
 
 ### API Documentation
 - **[Types Reference](types.md#api-reference)** - Complete type definitions
@@ -178,7 +178,7 @@ let sha3_derived = sha3_kdf(b"master key", b"salt", b"info", 32)?;
 - **[Microservices](integration.md#microservices-integration)** - Service authentication
 - **[Database](integration.md#database-integration)** - Data encryption at rest
 
-## 🚀 Quick Start Commands
+##  Quick Start Commands
 
 ```bash
 # Add to Cargo.toml

@@ -31,7 +31,7 @@ SOVEREIGN_NET faces multiple threat vectors:
 ```rust
 use lib_crypto::*;
 
-// ✅ RECOMMENDED: Post-quantum secure algorithms
+// RECOMMENDED: Post-quantum secure algorithms
 fn secure_algorithm_selection() -> Result<()> {
     // Post-quantum signatures (quantum-resistant)
     let pq_keypair = post_quantum::DilithiumKeyPair::generate()?;
@@ -50,7 +50,7 @@ fn secure_algorithm_selection() -> Result<()> {
     Ok(())
 }
 
-// ❌ AVOID: Deprecated or weak algorithms
+// AVOID: Deprecated or weak algorithms
 fn avoid_weak_algorithms() {
     // DON'T USE: RSA (vulnerable to quantum attacks)
     // DON'T USE: ECDSA with weak curves (secp256k1 without post-quantum)
@@ -73,15 +73,15 @@ struct SecureKeyMaterial {
 }
 
 fn secure_key_management() -> Result<()> {
-    // ✅ Generate keys with secure randomness
+    // Generate keys with secure randomness
     let keypair = KeyPair::generate()?; // Uses system entropy
     
-    // ✅ Derive keys properly with salt
+    // Derive keys properly with salt
     let master_key = random::secure_random_bytes::<32>()?;
     let salt = random::secure_random_bytes::<32>()?;
     let derived_key = hashing::blake3_derive_key(&master_key, &salt);
     
-    // ✅ Store sensitive material in secure containers
+    // Store sensitive material in secure containers
     let mut secure_material = SecureKeyMaterial {
         private_key: master_key,
         derived_keys: vec![derived_key],
@@ -89,7 +89,7 @@ fn secure_key_management() -> Result<()> {
     
     // ... use keys for cryptographic operations ...
     
-    // ✅ Explicitly zero sensitive data
+    // Explicitly zero sensitive data
     secure_material.zeroize();
     
     println!("Secure key management implemented");
@@ -144,7 +144,7 @@ fn key_rotation_strategy() -> Result<()> {
 use lib_crypto::{KeyPair, symmetric::*};
 
 fn secure_communication() -> Result<()> {
-    // ✅ Perfect Forward Secrecy
+    // Perfect Forward Secrecy
     fn establish_ephemeral_channel() -> Result<([u8; 32], Vec<u8>)> {
         // Generate ephemeral keypair for each session
         let ephemeral_keypair = KeyPair::generate()?;
@@ -161,7 +161,7 @@ fn secure_communication() -> Result<()> {
     
     let (session_key, kem_ciphertext) = establish_ephemeral_channel()?;
     
-    // ✅ Authenticated encryption with associated data
+    // Authenticated encryption with associated data
     let plaintext = b"Confidential message requiring integrity";
     let associated_data = b"session_id=12345,timestamp=1640995200";
     let nonce = random::secure_random_bytes::<12>()?;
@@ -173,7 +173,7 @@ fn secure_communication() -> Result<()> {
         &nonce
     )?;
     
-    // ✅ Secure transmission format: [KEM_CT][NONCE][AEAD_CT]
+    // Secure transmission format: [KEM_CT][NONCE][AEAD_CT]
     let mut secure_message = Vec::new();
     secure_message.extend_from_slice(&kem_ciphertext);
     secure_message.extend_from_slice(&nonce);
@@ -195,24 +195,24 @@ fn side_channel_protection() -> Result<()> {
     let keypair = KeyPair::generate()?;
     let message = b"Message requiring side-channel protection";
     
-    // ✅ Constant-time operations (built into Ed25519)
+    // Constant-time operations (built into Ed25519)
     let signature = keypair.sign(message)?; // Constant-time signing
     
-    // ✅ Timing attack mitigation with random delays
+    // Timing attack mitigation with random delays
     let mut rng = SecureRng::new()?;
     let jitter_us = rng.gen_range(100..1000); // 0.1-1ms random delay
     std::thread::sleep(std::time::Duration::from_micros(jitter_us));
     
-    // ✅ Memory access pattern obfuscation
+    // Memory access pattern obfuscation
     let dummy_operations = rng.gen_range(5..15);
     for _ in 0..dummy_operations {
         let _ = random::secure_random_bytes::<32>()?; // Dummy computation
     }
     
-    // ✅ Power analysis resistance (algorithmic)
+    // Power analysis resistance (algorithmic)
     let verification = keypair.verify(&signature, message)?;
     
-    // ✅ Cache timing attack mitigation
+    // Cache timing attack mitigation
     let cache_noise_iterations = rng.gen_range(10..50);
     let mut cache_noise = vec![0u8; 4096 * cache_noise_iterations];
     rng.fill_bytes(&mut cache_noise);
@@ -228,7 +228,7 @@ fn side_channel_protection() -> Result<()> {
 use lib_crypto::{KeyPair, hashing::blake3_hash};
 
 fn network_attack_protection() -> Result<()> {
-    // ✅ Replay attack prevention
+    // Replay attack prevention
     struct ReplayProtection {
         nonce_cache: std::collections::HashSet<[u8; 32]>,
         window_start: u64,
@@ -260,7 +260,7 @@ fn network_attack_protection() -> Result<()> {
         }
     }
     
-    // ✅ Message authentication with sequence numbers
+    // Message authentication with sequence numbers
     struct MessageAuth {
         keypair: KeyPair,
         sequence_number: u64,
@@ -297,7 +297,7 @@ fn network_attack_protection() -> Result<()> {
 use lib_crypto::{post_quantum::*, classical::*};
 
 fn quantum_attack_preparation() -> Result<()> {
-    // ✅ Hybrid cryptosystem (classical + post-quantum)
+    // Hybrid cryptosystem (classical + post-quantum)
     struct HybridCrypto {
         classical_keypair: KeyPair,      // Fast, current security
         pq_keypair: DilithiumKeyPair,    // Quantum-resistant
@@ -357,7 +357,7 @@ fn quantum_attack_preparation() -> Result<()> {
 use lib_crypto::*;
 
 fn secure_input_validation() -> Result<()> {
-    // ✅ Validate all cryptographic inputs
+    // Validate all cryptographic inputs
     fn validate_signature_input(signature: &[u8], message: &[u8], pubkey: &[u8]) -> Result<()> {
         // Check signature length
         if signature.len() != 64 {
@@ -382,14 +382,14 @@ fn secure_input_validation() -> Result<()> {
         Ok(())
     }
     
-    // ✅ Sanitize and validate all inputs
+    // Sanitize and validate all inputs
     let raw_signature = [0u8; 64]; // Simulated input
     let raw_message = b"Test message";
     let raw_pubkey = [1u8; 32];
     
     validate_signature_input(&raw_signature, raw_message, &raw_pubkey)?;
     
-    // ✅ Use type-safe interfaces when possible
+    // Use type-safe interfaces when possible
     let keypair = KeyPair::generate()?;
     let message = b"Type-safe message signing";
     let signature = keypair.sign(message)?; // Type-safe, validated internally
@@ -409,19 +409,19 @@ fn secure_error_handling() -> Result<()> {
     let message = b"Test message for error handling";
     let signature = keypair.sign(message)?;
     
-    // ✅ Don't leak information through error messages
+    // Don't leak information through error messages
     fn safe_verification(sig: &[u8], msg: &[u8], pubkey: &[u8]) -> Result<bool> {
         match verify_signature_bytes(sig, msg, pubkey) {
             Ok(result) => Ok(result),
             Err(_) => {
-                // ✅ Generic error message (don't reveal why verification failed)
+                // Generic error message (don't reveal why verification failed)
                 println!("Verification failed"); // Same message for all failures
                 Ok(false)
             }
         }
     }
     
-    // ✅ Constant-time error responses
+    // Constant-time error responses
     fn constant_time_verification(sig: &[u8], msg: &[u8], pubkey: &[u8]) -> Result<bool> {
         let start_time = std::time::Instant::now();
         
@@ -437,7 +437,7 @@ fn secure_error_handling() -> Result<()> {
         Ok(result)
     }
     
-    // ✅ Audit security-relevant errors
+    // Audit security-relevant errors
     fn audit_security_events(event: &str, details: &str) {
         let timestamp = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
@@ -466,7 +466,7 @@ fn secure_error_handling() -> Result<()> {
 use lib_crypto::*;
 use zeroize::{Zeroize, ZeroizeOnDrop};
 
-// ✅ Secure memory containers
+// Secure memory containers
 #[derive(ZeroizeOnDrop)]
 struct SecureBuffer {
     data: Vec<u8>,
@@ -498,17 +498,17 @@ impl SecureBuffer {
 }
 
 fn memory_security() -> Result<()> {
-    // ✅ Use secure buffers for sensitive data
+    // Use secure buffers for sensitive data
     let mut secure_key_buffer = SecureBuffer::new(32);
     let key_material = random::secure_random_bytes::<32>()?;
     secure_key_buffer.write(0, &key_material)?;
     
-    // ✅ Prevent memory dumps of sensitive data
+    // Prevent memory dumps of sensitive data
     use mlock::*; // Hypothetical memory locking crate
     let sensitive_data = random::secure_random_bytes::<64>()?;
     // mlock(&sensitive_data)?; // Lock memory page to prevent swapping
     
-    // ✅ Overwrite sensitive data multiple times
+    // Overwrite sensitive data multiple times
     fn secure_overwrite(buffer: &mut [u8]) {
         // Multiple pass overwrite (DoD 5220.22-M standard)
         buffer.fill(0x00);
@@ -523,7 +523,7 @@ fn memory_security() -> Result<()> {
         buffer.zeroize();
     }
     
-    // ✅ Stack allocation for temporary sensitive data
+    // Stack allocation for temporary sensitive data
     {
         let temp_key = random::secure_random_bytes::<32>()?;
         // Use temp_key...
@@ -543,7 +543,7 @@ fn memory_security() -> Result<()> {
 use lib_crypto::*;
 
 fn cryptographic_testing() -> Result<()> {
-    // ✅ Test vector validation
+    // Test vector validation
     fn test_known_vectors() -> Result<()> {
         // Test with known good inputs/outputs
         let test_vectors = [
@@ -566,7 +566,7 @@ fn cryptographic_testing() -> Result<()> {
         Ok(())
     }
     
-    // ✅ Fuzzing inputs
+    // Fuzzing inputs
     fn fuzz_testing() -> Result<()> {
         let keypair = KeyPair::generate()?;
         let valid_message = b"Valid message";
@@ -587,7 +587,7 @@ fn cryptographic_testing() -> Result<()> {
         Ok(())
     }
     
-    // ✅ Timing analysis testing
+    // Timing analysis testing
     fn timing_analysis_testing() -> Result<()> {
         let keypair = KeyPair::generate()?;
         let message = b"Timing test message";
@@ -636,7 +636,7 @@ fn cryptographic_testing() -> Result<()> {
 use lib_crypto::*;
 
 fn penetration_testing() -> Result<()> {
-    // ✅ Test malformed inputs
+    // Test malformed inputs
     fn test_malformed_inputs() -> Result<()> {
         let keypair = KeyPair::generate()?;
         
@@ -662,7 +662,7 @@ fn penetration_testing() -> Result<()> {
         Ok(())
     }
     
-    // ✅ Test resource exhaustion attacks
+    // Test resource exhaustion attacks
     fn test_resource_exhaustion() -> Result<()> {
         // Test with very large messages (DoS prevention)
         let large_message = vec![0u8; 10_000_000]; // 10MB
@@ -701,7 +701,7 @@ fn penetration_testing() -> Result<()> {
 use lib_crypto::*;
 
 fn standards_compliance() -> Result<()> {
-    // ✅ FIPS 140-2 Level 2 equivalent practices
+    // FIPS 140-2 Level 2 equivalent practices
     fn fips_compliance_check() -> Result<()> {
         // Use FIPS-approved algorithms
         let keypair = KeyPair::generate()?; // Ed25519 (FIPS approved)
@@ -720,7 +720,7 @@ fn standards_compliance() -> Result<()> {
         Ok(())
     }
     
-    // ✅ Common Criteria EAL4+ practices
+    // Common Criteria EAL4+ practices
     fn common_criteria_compliance() -> Result<()> {
         // Security target: Protect cryptographic keys
         // TOE (Target of Evaluation): lib-crypto library

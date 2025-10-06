@@ -518,14 +518,14 @@ use lib_crypto::hashing::{hash_blake3, blake3_keyed};
 fn security_guidelines() {
     let sensitive_data = b"Password or other sensitive data";
     
-    // ❌ Don't use plain hashing for passwords
+    // Don't use plain hashing for passwords
     let _weak = hash_blake3(sensitive_data);
     
-    // ✅ Use keyed hashing with salt for passwords
+    // Use keyed hashing with salt for passwords
     let salt = b"random-salt-16-bytes"; 
     let _better = blake3_keyed(sensitive_data, salt);
     
-    // ✅ Even better: use dedicated password hashing (Argon2, etc.)
+    // Even better: use dedicated password hashing (Argon2, etc.)
     println!("Use appropriate hashing method for use case");
     
     // Always use domain separation for different contexts

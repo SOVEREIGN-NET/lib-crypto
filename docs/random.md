@@ -606,14 +606,14 @@ fn check_entropy_sufficient() -> Result<bool> {
 use lib_crypto::random::{SecureRng, secure_random_bytes};
 
 fn secure_randomness_practices() -> Result<()> {
-    // ✅ Use cryptographically secure RNG
+    // Use cryptographically secure RNG
     let secure_key = secure_random_bytes::<32>()?;
     
-    // ❌ Never use predictable sources for cryptography
+    // Never use predictable sources for cryptography
     // let weak_random = std::time::SystemTime::now().duration_since(UNIX_EPOCH)?.as_nanos() as u32;
     // let weak_key = weak_random.to_be_bytes(); // INSECURE!
     
-    // ✅ Use proper RNG for all cryptographic needs
+    // Use proper RNG for all cryptographic needs
     let mut rng = SecureRng::new()?;
     let nonce = rng.next_u64().to_be_bytes();
     
@@ -628,16 +628,16 @@ fn secure_randomness_practices() -> Result<()> {
 use lib_crypto::random::{SecureRng, secure_random_bytes, check_entropy_available};
 
 fn entropy_best_practices() -> Result<()> {
-    // ✅ Check entropy before critical operations
+    // Check entropy before critical operations
     if !check_entropy_available()? {
         // Wait for entropy or fail safely
         std::thread::sleep(std::time::Duration::from_millis(100));
     }
     
-    // ✅ Initialize RNG once, reuse appropriately
+    // Initialize RNG once, reuse appropriately
     let mut rng = SecureRng::new()?;
     
-    // ✅ For very sensitive operations, gather extra entropy
+    // For very sensitive operations, gather extra entropy
     let mut high_entropy_material = Vec::new();
     for _ in 0..5 {
         high_entropy_material.extend_from_slice(&secure_random_bytes::<32>()?);
@@ -655,7 +655,7 @@ use lib_crypto::random::secure_random_bytes;
 use zeroize::Zeroize;
 
 fn memory_security_practices() -> Result<()> {
-    // ✅ Zero sensitive random data after use
+    // Zero sensitive random data after use
     let mut random_seed = secure_random_bytes::<32>()?;
     
     // ... use random_seed for key derivation ...
@@ -663,7 +663,7 @@ fn memory_security_practices() -> Result<()> {
     // Clear from memory
     random_seed.zeroize();
     
-    // ✅ Use stack allocation for temporary random data when possible
+    // Use stack allocation for temporary random data when possible
     {
         let temp_random = secure_random_bytes::<16>()?;
         // ... use temp_random ...

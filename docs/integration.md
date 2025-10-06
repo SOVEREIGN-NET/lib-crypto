@@ -1002,7 +1002,7 @@ impl CryptoIntegrationTest {
         self.test_signature_verification()?;
         self.test_cross_compatibility()?;
         
-        println!("🎉 All integration tests passed!");
+        println!(" All integration tests passed!");
         Ok(())
     }
 }

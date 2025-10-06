@@ -31,3 +31,19 @@ pub enum SignatureAlgorithm {
 
 /// Type alias for compatibility with other modules
 pub type PostQuantumSignature = Signature;
+
+impl Default for Signature {
+    fn default() -> Self {
+        use crate::types::keys::PublicKey;
+        Signature {
+            signature: Vec::new(),
+            public_key: PublicKey {
+                dilithium_pk: Vec::new(),
+                kyber_pk: Vec::new(),
+                key_id: [0u8; 32],
+            },
+            algorithm: SignatureAlgorithm::Dilithium2,
+            timestamp: 0,
+        }
+    }
+}

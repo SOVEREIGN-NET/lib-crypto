@@ -11,10 +11,10 @@ The types module defines:
 - **Encapsulation Types**: Key encapsulation mechanism results
 
 All types are designed for:
-- ✅ **Serialization**: Serde support for storage and network transmission
-- ✅ **Security**: Automatic memory zeroization for sensitive data
-- ✅ **Compatibility**: Cross-platform and network-safe representations
-- ✅ **Performance**: Efficient memory layout and operations
+- **Serialization**: Serde support for storage and network transmission
+- **Security**: Automatic memory zeroization for sensitive data
+- **Compatibility**: Cross-platform and network-safe representations
+- **Performance**: Efficient memory layout and operations
 
 ## Core Types
 

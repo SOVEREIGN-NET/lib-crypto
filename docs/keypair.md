@@ -66,9 +66,9 @@ fn validated_generation() -> Result<()> {
     let keypair = KeyPair::generate()?;
     
     // Internal validation checks:
-    // ✅ No weak keys (all-zero private keys)
-    // ✅ Cryptographic consistency between public/private keys
-    // ✅ Test signature/verification roundtrip
+    // No weak keys (all-zero private keys)
+    // Cryptographic consistency between public/private keys
+    // Test signature/verification roundtrip
     
     // Manual validation (already done internally)
     keypair.validate()?;
@@ -380,7 +380,7 @@ fn key_storage() -> Result<()> {
     // Serialize public key (safe to store/transmit)
     let public_json = serde_json::to_string(&keypair.public_key)?;
     
-    // ⚠️ NEVER serialize private keys to persistent storage in plaintext!
+    // NEVER serialize private keys to persistent storage in plaintext!
     // This is just for demonstration
     let private_json = serde_json::to_string(&keypair.private_key)?;
     
@@ -535,7 +535,7 @@ fn secure_key_lifecycle() -> Result<()> {
     let signature = keypair.sign(message)?;
     
     // 4. Storage (if needed)
-    // ⚠️ Never store private keys in plaintext!
+    // Never store private keys in plaintext!
     // Use encryption, HSMs, or secure key management systems
     
     // 5. Memory Management

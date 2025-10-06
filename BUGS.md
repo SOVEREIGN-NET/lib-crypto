@@ -1,11 +1,11 @@
 problems
-❌ No pq_commit() function
-❌ No pq_generate_blinding() function
-❌ No pq_bind_proof() function
-❌ No post-quantum commitment schemes
-❌ No lattice-based ZK primitives
-❌ No hash-based ZK primitives
-❌ No hybrid proof structures
+No pq_commit() function
+No pq_generate_blinding() function
+No pq_bind_proof() function
+No post-quantum commitment schemes
+No lattice-based ZK primitives
+No hash-based ZK primitives
+No hybrid proof structures
 
 pqc is not properly implemented this needs to be fixed. this was true for the original implementation as well.
 
