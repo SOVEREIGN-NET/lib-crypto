@@ -216,7 +216,7 @@ cargo doc --open
 - **Timing attacks**: Constant-time algorithms
 - **Entropy**: System randomness + proper seeding
 
-## 📞 Support and Contributing
+##  Support and Contributing
 
 ### Getting Help
 - **Documentation**: Start with [Getting Started](getting_started.md)
