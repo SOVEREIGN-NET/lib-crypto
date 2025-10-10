@@ -10,7 +10,7 @@ Comprehensive examples demonstrating real-world usage patterns of lib-crypto in 
 use lib_crypto::*;
 
 fn hello_crypto_world() -> Result<()> {
-    println!("🔒 Welcome to SOVEREIGN_NET Cryptography!");
+    println!(" Welcome to SOVEREIGN_NET Cryptography!");
     
     // Generate a keypair
     let keypair = KeyPair::generate()?;
@@ -341,7 +341,7 @@ impl DocumentSigningSystem {
             document_hash,
         };
         
-        println!("📄 Document created: '{}' by {}", title, author);
+        println!(" Document created: '{}' by {}", title, author);
         Ok(document)
     }
     
@@ -596,7 +596,7 @@ impl SecureFileStorage {
         self.file_index.files.push(encrypted_file);
         self.update_index_hash()?;
         
-        println!("🔒 File '{}' encrypted and stored (ID: {})", filename, &key_id[..8]);
+        println!(" File '{}' encrypted and stored (ID: {})", filename, &key_id[..8]);
         Ok(key_id)
     }
     
@@ -700,7 +700,7 @@ fn secure_file_storage_example() -> Result<()> {
     
     // Retrieve and verify files
     let (retrieved_name, retrieved_data) = file_storage.decrypt_and_retrieve(&doc1_id)?;
-    println!("\n📄 Retrieved '{}': {}", 
+    println!("\n Retrieved '{}': {}", 
              retrieved_name, String::from_utf8_lossy(&retrieved_data));
     
     // Delete a file
@@ -1108,7 +1108,7 @@ use lib_crypto::*;
 use std::time::Instant;
 
 fn benchmark_crypto_operations() -> Result<()> {
-    println!("⚡ Performance Benchmarks\n");
+    println!(" Performance Benchmarks\n");
     
     let iterations = 1000;
     
