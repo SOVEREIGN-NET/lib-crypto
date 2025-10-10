@@ -1,6 +1,6 @@
 //! Development mode signature handling - preserving ZHTP browser compatibility
 //! 
-//! Real development mode logic from crypto.rs for browser integration
+//! development mode logic from crypto.rs for browser integration
 
 /// Check if signature is in development mode format
 pub fn is_development_signature(signature: &[u8]) -> bool {

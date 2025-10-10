@@ -1,6 +1,6 @@
-//! Post-quantum cryptography constants - preserving real CRYSTALS key sizes
+//! Post-quantum cryptography constants - preserving CRYSTALS key sizes
 //! 
-//! Real constants from crypto.rs, lines 69-75
+//! constants from crypto.rs, lines 69-75
 
 /// CRYSTALS-Kyber512 constants (NIST post-quantum standard)
 pub const KYBER512_CIPHERTEXT_BYTES: usize = 768;

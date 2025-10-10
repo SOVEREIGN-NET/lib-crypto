@@ -1,6 +1,6 @@
-//! CRYSTALS-Dilithium wrapper functions - preserving real post-quantum signatures
+//! CRYSTALS-Dilithium wrapper functions - preserving post-quantum signatures
 //! 
-//! Real implementation wrappers from crypto.rs for CRYSTALS-Dilithium
+//! implementation wrappers from crypto.rs for CRYSTALS-Dilithium
 
 use anyhow::Result;
 use pqcrypto_dilithium::{dilithium2, dilithium5};

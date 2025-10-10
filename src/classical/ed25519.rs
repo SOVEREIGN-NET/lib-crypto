@@ -1,6 +1,6 @@
 //! Ed25519 classical cryptography for compatibility
 //! 
-//! Real Ed25519 implementation from crypto.rs for legacy support
+//! Ed25519 implementation from crypto.rs for legacy support
 
 use anyhow::Result;
 use ed25519_dalek::{SigningKey, VerifyingKey, Signature as Ed25519Signature, Signer, Verifier};

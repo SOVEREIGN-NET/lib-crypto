@@ -1,6 +1,6 @@
 //! KeyPair management module
 //! 
-//! Real implementations from crypto.rs preserving working post-quantum cryptography
+//! implementations from crypto.rs preserving working post-quantum cryptography
 
 pub mod generation;
 pub mod derivation;

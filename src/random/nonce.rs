@@ -1,6 +1,6 @@
-//! Nonce generation - preserving real ZHTP nonce security
+//! Nonce generation - preserving ZHTP nonce security
 //! 
-//! Real implementation from crypto.rs, lines 703-707
+//! implementation from crypto.rs, lines 703-707
 
 use rand::{RngCore, rngs::OsRng};
 

@@ -1,6 +1,6 @@
-//! Signature type definitions - preserving real ZHTP signature structures
+//! Signature type definitions - preserving ZHTP signature structures
 //! 
-//! Real implementations from crypto.rs, lines 162-192
+//! implementations from crypto.rs, lines 162-192
 
 use serde::{Serialize, Deserialize};
 use crate::types::PublicKey;

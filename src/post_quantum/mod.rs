@@ -1,6 +1,6 @@
 //! Post-quantum cryptography module - CRYSTALS implementations
 //! 
-//! Real CRYSTALS-Dilithium and CRYSTALS-Kyber implementations
+//! CRYSTALS-Dilithium and CRYSTALS-Kyber implementations
 
 pub mod dilithium;
 pub mod kyber;

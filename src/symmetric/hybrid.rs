@@ -1,6 +1,6 @@
-//! Hybrid encryption - preserving real post-quantum + symmetric encryption
+//! Hybrid encryption - preserving post-quantum + symmetric encryption
 //! 
-//! Real implementation from crypto.rs, lines 667-700
+//! implementation from crypto.rs, lines 667-700
 
 use anyhow::Result;
 use crate::types::{PublicKey, Encapsulation};
@@ -9,11 +9,11 @@ use crate::symmetric::{encrypt_data, decrypt_data};
 use crate::keypair::KeyPair;
 
 /// Hybrid encryption using post-quantum KEM + symmetric encryption
-/// Real implementation from crypto.rs, lines 667-685
+/// implementation from crypto.rs, lines 667-685
 pub fn hybrid_encrypt(data: &[u8], public_key: &PublicKey) -> Result<Vec<u8>> {
     // For compatibility with hybrid_decrypt, we need to derive the symmetric key
     // deterministically rather than generating it randomly.
-    // This is a simplified approach - real KEM would encapsulate properly.
+    // This is a simplified approach - KEM would encapsulate properly.
     
     // Create a deterministic "encapsulation" using the public key
     let key_data = [&public_key.key_id[..], b"ZHTP-hybrid-v1"].concat();
@@ -39,7 +39,7 @@ pub fn hybrid_encrypt(data: &[u8], public_key: &PublicKey) -> Result<Vec<u8>> {
 }
 
 /// Hybrid decryption using post-quantum KEM + symmetric encryption
-/// Real implementation from crypto.rs, lines 687-700
+/// implementation from crypto.rs, lines 687-700
 pub fn hybrid_decrypt(encrypted_data: &[u8], keypair: &KeyPair) -> Result<Vec<u8>> {
     if encrypted_data.len() < 32 { // Minimum size for encapsulated key
         return Err(anyhow::anyhow!("Encrypted data too short"));
@@ -177,7 +177,7 @@ mod tests {
         let plaintext = b"ZHTP KeyPair encryption test";
         let associated_data = b"ZHTP-v1.0";
         
-        // Use the keypair's real encrypt/decrypt methods
+        // Use the keypair's encrypt/decrypt methods
         let ciphertext = keypair.encrypt(plaintext, associated_data)?;
         let decrypted = keypair.decrypt(&ciphertext, associated_data)?;
         

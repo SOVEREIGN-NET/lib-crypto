@@ -1,6 +1,6 @@
-//! Key derivation functions - preserving real ZHTP deterministic key generation
+//! Key derivation functions - preserving ZHTP deterministic key generation
 //! 
-//! Real implementations from crypto.rs, lines 285-320
+//! implementations from crypto.rs, lines 285-320
 
 use anyhow::Result;
 use blake3::Hasher as Blake3Hasher;
@@ -28,14 +28,14 @@ impl KeyPair {
             .map_err(|_| anyhow::anyhow!("Seed expansion failed"))?;
 
         // For deterministic generation, we create a deterministic key_id from the seed
-        // Real crypto libraries don't support deterministic key generation from seeds
+        // crypto libraries don't support deterministic key generation from seeds
         // So we use the seed itself to create a deterministic identifier
         let mut hasher = Blake3Hasher::new();
         hasher.update(seed);
         hasher.update(b"ZHTP-Deterministic-KeyID-v1");
         let key_id: [u8; 32] = hasher.finalize().into();
         
-        // Generate actual random keys (real crypto for security)
+        // Generate actual random keys (crypto for security)
         let (dilithium_pk, dilithium_sk) = dilithium2::keypair();
         let (kyber_pk, kyber_sk) = kyber512::keypair();
         let mut sk_bytes = [0u8; 32];

@@ -1,6 +1,6 @@
-//! Signature verification - preserving real ZHTP verification with development mode
+//! Signature verification - preserving ZHTP verification with development mode
 //! 
-//! Real implementation from crypto.rs, lines 960-1087 including browser compatibility
+//! implementation from crypto.rs, lines 960-1087 including browser compatibility
 
 use anyhow::Result;
 use pqcrypto_dilithium::dilithium2;

@@ -199,7 +199,7 @@ cargo test --release  # Performance tests
 cargo doc --open
 ```
 
-## 🛡️ Security Considerations
+##  Security Considerations
 
 ### Immediate Threats (2024)
 - **Classical attacks**: Mitigated by Ed25519, ChaCha20-Poly1305

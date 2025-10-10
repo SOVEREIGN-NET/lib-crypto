@@ -1,6 +1,6 @@
-//! BLAKE3 hashing - preserving real ZHTP fast hashing
+//! BLAKE3 hashing - preserving ZHTP fast hashing
 //! 
-//! Real implementation from crypto.rs, lines 639-642
+//! implementation from crypto.rs, lines 639-642
 
 use blake3::Hasher as Blake3Hasher;
 

@@ -465,7 +465,7 @@ impl BlockchainCrypto {
             .collect();
         let signatures = signatures?;
         
-        // Combine signatures (simplified - real implementation would use proper multi-sig)
+        // Combine signatures (simplified - implementation would use proper multi-sig)
         let mut multi_sig = Vec::new();
         for sig in signatures {
             multi_sig.extend_from_slice(&sig.as_bytes());
@@ -915,7 +915,7 @@ impl CryptoIntegrationTest {
             b"Short message".to_vec(),
             vec![0u8; 1024], // 1KB
             vec![0u8; 1024 * 1024], // 1MB
-            b"Unicode test: 🛡️💻".to_vec(),
+            b"Unicode test: 💻".to_vec(),
             Vec::new(), // Empty
         ];
         
@@ -1483,7 +1483,7 @@ impl BlockchainCrypto {
             .collect();
         let signatures = signatures?;
         
-        // Combine signatures (simplified - real implementation would use proper multi-sig)
+        // Combine signatures (simplified - implementation would use proper multi-sig)
         let mut multi_sig = Vec::new();
         for sig in signatures {
             multi_sig.extend_from_slice(&sig.as_bytes());
@@ -1933,7 +1933,7 @@ impl CryptoIntegrationTest {
             b"Short message".to_vec(),
             vec![0u8; 1024], // 1KB
             vec![0u8; 1024 * 1024], // 1MB
-            b"Unicode test: 🛡️💻".to_vec(),
+            b"Unicode test: 💻".to_vec(),
             Vec::new(), // Empty
         ];
         

@@ -2,7 +2,7 @@
 name = "lib-crypto"
 version = "0.1.0"
 edition = "2021"
-description = "ZHTP Post-Quantum Cryptography Foundation Module - Real CRYSTALS implementations"
+description = "ZHTP Post-Quantum Cryptography Foundation Module - CRYSTALS implementations"
 license = "MIT"
 repository = "https://github.com/SOVEREIGN-NETWORK/ZHTPDEV"
 

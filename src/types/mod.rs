@@ -1,6 +1,6 @@
 //! Core cryptographic type definitions
 //! 
-//! Real types from the production ZHTP cryptography system
+//! types from the production ZHTP cryptography system
 
 pub mod hash;
 pub mod keys;

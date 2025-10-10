@@ -1,6 +1,6 @@
 //! Key derivation functions module
 //! 
-//! Real implementations from crypto.rs preserving secure key derivation
+//! implementations from crypto.rs preserving secure key derivation
 
 pub mod hkdf;
 

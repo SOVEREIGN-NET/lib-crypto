@@ -1,6 +1,6 @@
 //! Ring signature implementation for ZHTP
 //! 
-//! Real implementation from crypto.rs, lines 745-822
+//! implementation from crypto.rs, lines 745-822
 
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
@@ -11,7 +11,7 @@ use zeroize::ZeroizeOnDrop;
 use rand::{RngCore, rngs::OsRng};
 
 /// Ring signature structure for anonymous signing
-/// Real implementation from crypto.rs, lines 745-756
+/// implementation from crypto.rs, lines 745-756
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct RingSignature {
     pub c: [u8; 32],     // Challenge hash
@@ -20,7 +20,7 @@ pub struct RingSignature {
 }
 
 /// Ring signature context for managing ring operations
-/// Real implementation from crypto.rs, lines 758-767
+/// implementation from crypto.rs, lines 758-767
 #[derive(Clone, Debug, ZeroizeOnDrop)]
 pub struct RingContext {
     #[zeroize(skip)]
@@ -33,7 +33,7 @@ pub struct RingContext {
 
 impl RingContext {
     /// Create a new ring context
-    /// Real implementation from crypto.rs, lines 769-776
+    /// implementation from crypto.rs, lines 769-776
     pub fn new(ring: Vec<PublicKey>, message: Vec<u8>) -> Self {
         Self {
             ring,
@@ -44,7 +44,7 @@ impl RingContext {
     }
 
     /// Set the signer for this ring
-    /// Real implementation from crypto.rs, lines 778-785
+    /// implementation from crypto.rs, lines 778-785
     pub fn set_signer(&mut self, signer_index: usize, private_key: PrivateKey) -> Result<()> {
         if signer_index >= self.ring.len() {
             return Err(anyhow::anyhow!("Signer index out of bounds"));
@@ -55,7 +55,7 @@ impl RingContext {
     }
 
     /// Generate a ring signature using proper cryptographic methods
-    /// Real implementation from crypto.rs, lines 787-822
+    /// implementation from crypto.rs, lines 787-822
     pub fn sign(&self) -> Result<RingSignature> {
         let signer_index = self.signer_index.ok_or_else(|| {
             anyhow::anyhow!("No signer set")
@@ -107,7 +107,7 @@ impl RingContext {
         // Step 3: Generate proper response for the actual signer
         responses[signer_index] = self.generate_signer_response(&challenge, private_key)?;
 
-        // Step 4: Update signer's commitment with the real response
+        // Step 4: Update signer's commitment with the response
         commitments[signer_index] = self.simulate_commitment(&self.ring[signer_index].dilithium_pk, &responses[signer_index])?;
 
         // Step 5: Recompute final challenge with correct signer commitment
@@ -130,7 +130,7 @@ impl RingContext {
     }
 
     /// Generate key image for double-spend prevention
-    /// Real implementation from crypto.rs, lines 824-830
+    /// implementation from crypto.rs, lines 824-830
     fn generate_key_image(&self, private_key: &PrivateKey) -> Result<[u8; 32]> {
         // Simplified key image generation using curve operations
         let base_point = [9u8; 32]; // Curve25519 base point
@@ -139,7 +139,7 @@ impl RingContext {
     }
 
     /// Simulate commitment for non-signers
-    /// Real implementation from crypto.rs, lines 832-838
+    /// implementation from crypto.rs, lines 832-838
     fn simulate_commitment(&self, pubkey: &[u8], response: &[u8; 32]) -> Result<[u8; 32]> {
         let mut commitment_data = Vec::new();
         commitment_data.extend_from_slice(pubkey);
@@ -149,9 +149,9 @@ impl RingContext {
     }
 
     /// Generate response for the actual signer
-    /// Real implementation from crypto.rs, lines 840-847
+    /// implementation from crypto.rs, lines 840-847
     fn generate_signer_response(&self, challenge: &[u8; 32], private_key: &PrivateKey) -> Result<[u8; 32]> {
-        // Real response generation using the challenge and private key
+        // response generation using the challenge and private key
         let mut response_data = Vec::new();
         response_data.extend_from_slice(challenge);
         response_data.extend_from_slice(&private_key.dilithium_sk);
@@ -161,7 +161,7 @@ impl RingContext {
 }
 
 /// Verify a ring signature using proper cryptographic verification
-/// Real implementation from crypto.rs, lines 849-880
+/// implementation from crypto.rs, lines 849-880
 pub fn verify_ring_signature(
     signature: &RingSignature,
     message: &[u8],
@@ -202,7 +202,7 @@ pub fn verify_ring_signature(
         return Ok(false);
     }
 
-    // Step 5: Verify that at least one response appears to be from a real signer
+    // Step 5: Verify that at least one response appears to be from a signer
     // (not all responses should be purely random)
     let mut entropy_check_passed = false;
     for response in &signature.responses {

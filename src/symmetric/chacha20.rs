@@ -1,6 +1,6 @@
-//! ChaCha20-Poly1305 AEAD encryption - preserving real symmetric crypto
+//! ChaCha20-Poly1305 AEAD encryption - preserving symmetric crypto
 //! 
-//! Real implementation from crypto.rs, lines 910-945
+//! implementation from crypto.rs, lines 910-945
 
 use anyhow::Result;
 use chacha20poly1305::{

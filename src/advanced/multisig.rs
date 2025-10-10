@@ -1,6 +1,6 @@
 //! Multi-signature implementation for ZHTP
 //! 
-//! Real implementation from crypto.rs, lines 841-910
+//! implementation from crypto.rs, lines 841-910
 
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
@@ -9,7 +9,7 @@ use crate::types::{PrivateKey, PublicKey, Signature};
 use crate::keypair::KeyPair;
 
 /// Multi-signature scheme supporting threshold signatures
-/// Real implementation from crypto.rs, lines 841-849
+/// implementation from crypto.rs, lines 841-849
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MultiSig {
     /// Required number of signatures
@@ -22,7 +22,7 @@ pub struct MultiSig {
 
 impl MultiSig {
     /// Create a new multi-signature setup
-    /// Real implementation from crypto.rs, lines 851-861
+    /// implementation from crypto.rs, lines 851-861
     pub fn new(threshold: usize, participants: Vec<PublicKey>) -> Result<Self> {
         if threshold == 0 || threshold > participants.len() {
             return Err(anyhow::anyhow!("Invalid threshold"));
@@ -36,7 +36,7 @@ impl MultiSig {
     }
     
     /// Add a partial signature
-    /// Real implementation from crypto.rs, lines 863-874
+    /// implementation from crypto.rs, lines 863-874
     pub fn add_signature(&mut self, participant_index: usize, signature: Signature) -> Result<()> {
         if participant_index >= self.participants.len() {
             return Err(anyhow::anyhow!("Invalid participant index"));
@@ -52,13 +52,13 @@ impl MultiSig {
     }
     
     /// Check if we have enough signatures to execute
-    /// Real implementation from crypto.rs, lines 876-879
+    /// implementation from crypto.rs, lines 876-879
     pub fn is_complete(&self) -> bool {
         self.signatures.len() >= self.threshold
     }
     
     /// Verify all collected signatures
-    /// Real implementation from crypto.rs, lines 881-910
+    /// implementation from crypto.rs, lines 881-910
     pub fn verify(&self, message: &[u8]) -> Result<bool> {
         if !self.is_complete() {
             return Ok(false);

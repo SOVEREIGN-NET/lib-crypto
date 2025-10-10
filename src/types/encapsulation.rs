@@ -1,6 +1,6 @@
-//! Key encapsulation type definitions - preserving real ZHTP encapsulation
+//! Key encapsulation type definitions - preserving ZHTP encapsulation
 //! 
-//! Real implementations from crypto.rs, lines 194-202
+//! implementations from crypto.rs, lines 194-202
 
 use zeroize::{Zeroize, ZeroizeOnDrop};
 

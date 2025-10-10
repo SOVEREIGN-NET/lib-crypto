@@ -1,6 +1,6 @@
-//! CRYSTALS-Kyber wrapper functions - preserving real post-quantum KEM
+//! CRYSTALS-Kyber wrapper functions - preserving post-quantum KEM
 //! 
-//! Real implementation wrappers from crypto.rs for CRYSTALS-Kyber
+//! implementation wrappers from crypto.rs for CRYSTALS-Kyber
 
 use anyhow::Result;
 use pqcrypto_kyber::kyber512;

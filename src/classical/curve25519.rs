@@ -1,6 +1,6 @@
 //! Curve25519 operations for ring signatures
 //! 
-//! Real curve operations from crypto.rs for ring signature support
+//! curve operations from crypto.rs for ring signature support
 
 use anyhow::Result;
 use curve25519_dalek::{
@@ -11,9 +11,9 @@ use curve25519_dalek::{
 use crate::hashing::hash_blake3;
 
 /// Generate key image from private key (prevents double spending)
-/// Real implementation from crypto.rs, lines 823-845
+/// implementation from crypto.rs, lines 823-845
 pub fn generate_key_image(private_key: &[u8]) -> Result<[u8; 32]> {
-    // Real key image generation using curve operations
+    // key image generation using curve operations
     let scalar = Scalar::from_bytes_mod_order_wide(&{
         let mut wide = [0u8; 64];
         wide[..private_key.len().min(64)].copy_from_slice(&private_key[..private_key.len().min(64)]);
@@ -61,7 +61,7 @@ pub fn bytes_to_point(bytes: &[u8; 32]) -> Option<RistrettoPoint> {
 }
 
 /// Scalar multiplication on Curve25519 for ring signatures
-/// Real implementation from crypto.rs, lines 720-735
+/// implementation from crypto.rs, lines 720-735
 pub fn curve25519_scalar_mult(scalar: &[u8], _point: &[u8; 32]) -> Result<[u8; 32]> {
     // Convert scalar bytes to Scalar (handle different input lengths)
     let scalar_bytes = if scalar.len() >= 32 {
@@ -76,7 +76,7 @@ pub fn curve25519_scalar_mult(scalar: &[u8], _point: &[u8; 32]) -> Result<[u8; 3
     
     let scalar = Scalar::from_bytes_mod_order(scalar_bytes);
     
-    // For simplicity, use base point multiplication (in real implementation would use actual point)
+    // For simplicity, use base point multiplication (in implementation would use actual point)
     let result_point = &scalar * &RISTRETTO_BASEPOINT_POINT;
     
     // Return compressed point bytes

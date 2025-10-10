@@ -692,7 +692,7 @@ fn secure_file_storage_example() -> Result<()> {
     let img_id = file_storage.encrypt_and_store("photo.jpg", &image_data)?;
     
     // List stored files
-    println!("\n📂 Stored Files:");
+    println!("\n Stored Files:");
     let files = file_storage.list_files();
     for (filename, short_id, size, created_at) in files {
         println!("  {} [{}...] - {} bytes (created: {})", 
@@ -708,7 +708,7 @@ fn secure_file_storage_example() -> Result<()> {
     file_storage.delete_file(&doc2_id)?;
     
     // Show remaining files
-    println!("\n📂 Remaining Files:");
+    println!("\n Remaining Files:");
     let remaining_files = file_storage.list_files();
     for (filename, short_id, size, _) in remaining_files {
         println!("  {} [{}...] - {} bytes", filename, short_id, size);
@@ -789,7 +789,7 @@ impl MultiPartyKeyExchange {
         let group_key = hashing::blake3_derive_key(&group_key_material, b"GROUP_KEY");
         self.group_key = Some(group_key);
         
-        println!("🔑 Group key established between {} participants", participant_names.len());
+        println!(" Group key established between {} participants", participant_names.len());
         Ok(group_key)
     }
     
@@ -1872,7 +1872,7 @@ fn secure_file_storage_example() -> Result<()> {
     let img_id = file_storage.encrypt_and_store("photo.jpg", &image_data)?;
     
     // List stored files
-    println!("\n📂 Stored Files:");
+    println!("\n Stored Files:");
     let files = file_storage.list_files();
     for (filename, short_id, size, created_at) in files {
         println!("  {} [{}...] - {} bytes (created: {})", 
@@ -1888,7 +1888,7 @@ fn secure_file_storage_example() -> Result<()> {
     file_storage.delete_file(&doc2_id)?;
     
     // Show remaining files
-    println!("\n📂 Remaining Files:");
+    println!("\n Remaining Files:");
     let remaining_files = file_storage.list_files();
     for (filename, short_id, size, _) in remaining_files {
         println!("  {} [{}...] - {} bytes", filename, short_id, size);
@@ -1969,7 +1969,7 @@ impl MultiPartyKeyExchange {
         let group_key = hashing::blake3_derive_key(&group_key_material, b"GROUP_KEY");
         self.group_key = Some(group_key);
         
-        println!("🔑 Group key established between {} participants", participant_names.len());
+        println!(" Group key established between {} participants", participant_names.len());
         Ok(group_key)
     }
     

@@ -1,6 +1,6 @@
 //! ZHTP Cryptography Foundation Module
 //! 
-//! Real cryptography implementations from crypto.rs preserving functionality
+//! cryptography implementations from crypto.rs preserving functionality
 
 // Core modules
 pub mod advanced;

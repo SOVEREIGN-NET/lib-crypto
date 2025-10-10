@@ -1,11 +1,11 @@
-//! Hash wrapper type implementation - preserving real ZHTP Hash functionality
+//! Hash wrapper type implementation - preserving ZHTP Hash functionality
 //! 
-//! Real implementation from crypto.rs, line 22-50
+//! implementation from crypto.rs, line 22-50
 
 use anyhow::Result;
 use serde::{Serialize, Deserialize};
 
-/// Hash wrapper type for ZHTP - Real implementation from production codebase
+/// Hash wrapper type for ZHTP - implementation from production codebase
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 pub struct Hash(pub [u8; 32]);
 

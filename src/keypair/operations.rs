@@ -1,6 +1,6 @@
-//! KeyPair operations - preserving real ZHTP signing, encryption, and verification
+//! KeyPair operations - preserving ZHTP signing, encryption, and verification
 //! 
-//! Real implementations from crypto.rs, lines 330-450, 451-570
+//! implementations from crypto.rs, lines 330-450, 451-570
 
 use anyhow::Result;
 use sha3::Sha3_256;
@@ -89,17 +89,17 @@ impl KeyPair {
             },
             // Removed duplicate Dilithium2 arm - already handled above
             SignatureAlgorithm::RingSignature => {
-                // Use real ring signature verification from advanced module
+                // Use ring signature verification from advanced module
                 self.verify_ring_signature_real(signature, message)
             }
         }
     }
 
-    /// Verify ring signature for anonymity using real cryptographic implementation
+    /// Verify ring signature for anonymity using cryptographic implementation
     fn verify_ring_signature_real(&self, signature: &Signature, message: &[u8]) -> Result<bool> {
         // Parse the ring signature from signature bytes
-        // In a real implementation, you'd need to properly serialize/deserialize RingSignature
-        // For now, we'll do a basic structural validation and delegate to the real verifier
+        // In a implementation, you'd need to properly serialize/deserialize RingSignature
+        // For now, we'll do a basic structural validation and delegate to the verifier
         
         if signature.signature.len() < 96 { // Minimum size for ring signature (32 + 32 + 32)
             return Ok(false);
@@ -117,11 +117,11 @@ impl KeyPair {
         // Create a minimal ring signature for verification
         let ring_sig = RingSignature {
             c,
-            responses: vec![first_response], // In real usage, you'd have multiple responses
+            responses: vec![first_response], // In usage, you'd have multiple responses
             key_image,
         };
         
-        // Use the real ring signature verifier with a minimal ring
+        // Use the ring signature verifier with a minimal ring
         let ring = vec![signature.public_key.clone()];
         verify_ring_signature(&ring_sig, message, &ring)
     }

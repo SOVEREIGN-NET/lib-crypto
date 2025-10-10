@@ -1,6 +1,6 @@
 //! Utility functions module
 //! 
-//! Real implementations from crypto.rs preserving convenience functions
+//! implementations from crypto.rs preserving convenience functions
 
 pub mod compatibility;
 

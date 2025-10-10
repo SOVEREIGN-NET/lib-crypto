@@ -1,6 +1,6 @@
-//! KeyPair generation - preserving real ZHTP post-quantum key generation
+//! KeyPair generation - preserving ZHTP post-quantum key generation
 //! 
-//! Real implementations from crypto.rs, lines 204-250, 260-310
+//! implementations from crypto.rs, lines 204-250, 260-310
 
 use anyhow::Result;
 use blake3::Hasher as Blake3Hasher;
@@ -14,7 +14,7 @@ use pqcrypto_traits::{
 };
 use crate::types::{PublicKey, PrivateKey};
 
-/// Real quantum-resistant key pair with secure memory management
+/// quantum-resistant key pair with secure memory management
 #[derive(Debug, Clone)]
 pub struct KeyPair {
     pub public_key: PublicKey,
@@ -22,7 +22,7 @@ pub struct KeyPair {
 }
 
 impl KeyPair {
-    /// Generate a new quantum-resistant key pair using real CRYSTALS implementations
+    /// Generate a new quantum-resistant key pair using CRYSTALS implementations
     /// This is production-ready cryptography with proper entropy sources
     pub fn generate() -> Result<Self> {
         let mut rng = OsRng;
@@ -31,10 +31,10 @@ impl KeyPair {
         let mut master_seed = vec![0u8; 64];
         rng.fill_bytes(&mut master_seed);
 
-        // Generate real CRYSTALS-Dilithium key pair (NIST post-quantum standard)
+        // Generate CRYSTALS-Dilithium key pair (NIST post-quantum standard)
         let (dilithium_pk, dilithium_sk) = dilithium2::keypair();
         
-        // Generate real CRYSTALS-Kyber key pair (NIST post-quantum standard)
+        // Generate CRYSTALS-Kyber key pair (NIST post-quantum standard)
         let (kyber_pk, kyber_sk) = kyber512::keypair();
         
         // Calculate unique key ID from post-quantum public keys only

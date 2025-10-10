@@ -1,6 +1,6 @@
-//! Compatibility utility functions - preserving real ZHTP convenience functions
+//! Compatibility utility functions - preserving ZHTP convenience functions
 //! 
-//! Real implementation from crypto.rs, lines 657-665
+//! implementation from crypto.rs, lines 657-665
 
 use anyhow::Result;
 use crate::keypair::KeyPair;

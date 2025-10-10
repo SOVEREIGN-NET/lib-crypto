@@ -1,6 +1,6 @@
-//! HKDF key derivation - preserving real ZHTP key derivation
+//! HKDF key derivation - preserving ZHTP key derivation
 //! 
-//! Real implementation from crypto.rs, lines 710-717
+//! implementation from crypto.rs, lines 710-717
 
 use anyhow::Result;
 use sha3::Sha3_256;

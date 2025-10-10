@@ -1,6 +1,6 @@
-//! Secure random number generator - preserving real ZHTP entropy
+//! Secure random number generator - preserving ZHTP entropy
 //! 
-//! Real implementation from crypto.rs, lines 720-742
+//! implementation from crypto.rs, lines 720-742
 
 use rand::{RngCore, rngs::OsRng};
 use zeroize::{Zeroize, ZeroizeOnDrop};

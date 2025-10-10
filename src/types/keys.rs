@@ -1,6 +1,6 @@
-//! Key type definitions - preserving real ZHTP key structures
+//! Key type definitions - preserving ZHTP key structures
 //! 
-//! Real implementations from crypto.rs, lines 78-150
+//! implementations from crypto.rs, lines 78-150
 
 use serde::{Serialize, Deserialize};
 use zeroize::{Zeroize, ZeroizeOnDrop};

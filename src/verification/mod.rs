@@ -1,6 +1,6 @@
 //! Signature verification module
 //! 
-//! Real implementations from crypto.rs preserving working verification logic
+//! implementations from crypto.rs preserving working verification logic
 
 pub mod signature_verify;
 pub mod dev_mode;
