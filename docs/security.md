@@ -790,7 +790,7 @@ impl SecurityMonitor {
     }
     
     fn security_alert(&self, message: &str) {
-        println!("🚨 SECURITY ALERT: {}", message);
+        println!(" SECURITY ALERT: {}", message);
         // In production: send to SIEM, log to secure audit trail, notify security team
     }
     

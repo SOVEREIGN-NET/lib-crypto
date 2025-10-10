@@ -914,7 +914,7 @@ impl CryptoIntegrationTest {
             b"Short message".to_vec(),
             vec![0u8; 1024], // 1KB
             vec![0u8; 1024 * 1024], // 1MB
-            b"Unicode test: 🔒🛡️💻".to_vec(),
+            b"Unicode test: 🛡️💻".to_vec(),
             Vec::new(), // Empty
         ];
         
