@@ -19,45 +19,8 @@ pub fn verify_signature(message: &[u8], signature: &[u8], public_key: &[u8]) -> 
         // println!("verify_signature: message len={}, sig len={}, pk len={}", message.len(), signature.len(), public_key.len());
     }
     
-    // ENHANCED DEVELOPMENT MODE: Accept a wider range of signatures for browser integration
-    // This allows the browser to work while we transition to server-side crypto
-    if signature.len() < 64 {
-        println!("DEVELOPMENT MODE: Short signature detected, checking format");
-        let sig_str = String::from_utf8_lossy(signature);
-        
-        // Accept various development signature formats
-        if sig_str.starts_with("1234") || 
-           sig_str.contains("test") || 
-           sig_str.contains("dev") ||
-           sig_str.contains("mock") ||
-           signature.len() < 16 {
-            println!("Development signature accepted for testing");
-            return Ok(true);
-        }
-    }
-    
-    // Check for browser-generated development signatures (hex format)
-    if signature.len() > 100 && signature.len() < 5000 {
-        let sig_str = String::from_utf8_lossy(signature);
-        if sig_str.chars().all(|c| c.is_ascii_hexdigit()) {
-            println!("DEVELOPMENT MODE: Browser hex signature detected");
-            // Validate it has proper structure for development
-            if signature.len() >= 1000 { // Reasonable minimum for development
-                println!("Browser development signature accepted");
-                return Ok(true);
-            }
-        }
-    }
-    
-    // Check for enhanced development public keys from browser
-    let pk_str = String::from_utf8_lossy(public_key);
-    if pk_str.starts_with("abcdef") || 
-       pk_str.starts_with("dilithium") ||
-       pk_str.contains("_pub_") ||
-       pk_str.contains("_priv_") {
-        println!("DEVELOPMENT MODE: Browser development key detected, accepting signature");
-        return Ok(true);
-    }
+    //  PRODUCTION MODE: Strict signature verification only
+    // NO DEVELOPMENT BYPASSES - All signatures must be valid CRYSTALS-Dilithium
     
     // Pure post-quantum verification - CRYSTALS-Dilithium only (no Ed25519 fallback)
     {

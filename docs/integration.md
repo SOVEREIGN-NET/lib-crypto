@@ -53,11 +53,11 @@ use lib_crypto::{
 fn configure_crypto_features() -> Result<()> {
     // Feature detection
     println!("Available features:");
-    println!("- Ed25519 signatures: ✓");
-    println!("- CRYSTALS-Dilithium: {}", if cfg!(feature = "post-quantum") { "✓" } else { "✗" });
-    println!("- Ring signatures: {}", if cfg!(feature = "advanced") { "✓" } else { "✗" });
-    println!("- ChaCha20-Poly1305: ✓");
-    println!("- BLAKE3 hashing: ✓");
+    println!("- Ed25519 signatures: ");
+    println!("- CRYSTALS-Dilithium: {}", if cfg!(feature = "post-quantum") { "" } else { "✗" });
+    println!("- Ring signatures: {}", if cfg!(feature = "advanced") { "" } else { "✗" });
+    println!("- ChaCha20-Poly1305: ");
+    println!("- BLAKE3 hashing: ");
     
     Ok(())
 }
@@ -943,7 +943,7 @@ impl CryptoIntegrationTest {
             }
         }
         
-        println!("✓ End-to-end encryption tests passed");
+        println!(" End-to-end encryption tests passed");
         Ok(())
     }
     
@@ -969,7 +969,7 @@ impl CryptoIntegrationTest {
             }
         }
         
-        println!("✓ Signature verification tests passed");
+        println!(" Signature verification tests passed");
         Ok(())
     }
     
@@ -992,7 +992,7 @@ impl CryptoIntegrationTest {
         let bob_verifies_alice = alice_keypair_from_pubkey.verify(&alice_signature, message)?;
         assert!(bob_verifies_alice);
         
-        println!("✓ Cross-compatibility tests passed");
+        println!(" Cross-compatibility tests passed");
         Ok(())
     }
     
@@ -1071,11 +1071,11 @@ use lib_crypto::{
 fn configure_crypto_features() -> Result<()> {
     // Feature detection
     println!("Available features:");
-    println!("- Ed25519 signatures: ✓");
-    println!("- CRYSTALS-Dilithium: {}", if cfg!(feature = "post-quantum") { "✓" } else { "✗" });
-    println!("- Ring signatures: {}", if cfg!(feature = "advanced") { "✓" } else { "✗" });
-    println!("- ChaCha20-Poly1305: ✓");
-    println!("- BLAKE3 hashing: ✓");
+    println!("- Ed25519 signatures: ");
+    println!("- CRYSTALS-Dilithium: {}", if cfg!(feature = "post-quantum") { "" } else { "✗" });
+    println!("- Ring signatures: {}", if cfg!(feature = "advanced") { "" } else { "✗" });
+    println!("- ChaCha20-Poly1305: ");
+    println!("- BLAKE3 hashing: ");
     
     Ok(())
 }
@@ -1961,7 +1961,7 @@ impl CryptoIntegrationTest {
             }
         }
         
-        println!("✓ End-to-end encryption tests passed");
+        println!(" End-to-end encryption tests passed");
         Ok(())
     }
     
@@ -1987,7 +1987,7 @@ impl CryptoIntegrationTest {
             }
         }
         
-        println!("✓ Signature verification tests passed");
+        println!(" Signature verification tests passed");
         Ok(())
     }
     
@@ -2010,7 +2010,7 @@ impl CryptoIntegrationTest {
         let bob_verifies_alice = alice_keypair_from_pubkey.verify(&alice_signature, message)?;
         assert!(bob_verifies_alice);
         
-        println!("✓ Cross-compatibility tests passed");
+        println!(" Cross-compatibility tests passed");
         Ok(())
     }
     

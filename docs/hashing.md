@@ -216,7 +216,7 @@ fn data_integrity_system() -> Result<()> {
         let stored_hash = integrity_db.get(filename).unwrap();
         
         if current_hash == *stored_hash {
-            println!("{}: Integrity verified ✓", filename);
+            println!("{}: Integrity verified ", filename);
         } else {
             println!("{}: INTEGRITY FAILURE ✗", filename);
         }
