@@ -16,6 +16,7 @@ pub mod verification;
 // New modules for missing functionality
 pub mod hashing;
 pub mod random;
+// Note: password module moved to lib-identity/src/auth/password.rs
 
 // Re-export commonly used types and functions
 pub use types::{
