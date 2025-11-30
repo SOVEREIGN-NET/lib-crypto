@@ -16,6 +16,7 @@ pub mod verification;
 // New modules for missing functionality
 pub mod hashing;
 pub mod random;
+pub mod seed;
 
 // Re-export commonly used types and functions
 pub use types::{
@@ -30,6 +31,9 @@ pub use hashing::hash_blake3;
 
 // Re-export random functionality
 pub use random::{SecureRng, generate_nonce};
+
+// Re-export seed generation
+pub use seed::generate_identity_seed;
 
 // Re-export keypair functionality
 pub use keypair::generation::KeyPair;
